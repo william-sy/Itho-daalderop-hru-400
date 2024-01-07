@@ -1,0 +1,75 @@
+# Automation to set the HRU400 to max for 30/60 min before returning to 50%
+#
+alias: WTW-Fan-Controller
+description: ""
+trigger:
+  - platform: state
+    entity_id:
+      - input_boolean.wtw_time_30
+    from: "off"
+    to: "on"
+    id: Time30
+  - platform: state
+    entity_id:
+      - input_boolean.wtw_time_60
+    from: "off"
+    to: "on"
+    id: Time60
+condition: []
+action:
+  - parallel:
+      - if:
+          - condition: trigger
+            id:
+              - Time60
+        then:
+          - service: fan.set_percentage
+            target:
+              entity_id: fan.wtw_rs485_wtw_fan
+            data:
+              percentage: 100
+          - delay:
+              hours: 1
+              minutes: 0
+              seconds: 0
+              milliseconds: 0
+            enabled: true
+          - service: fan.set_percentage
+            target:
+              entity_id: fan.wtw_rs485_wtw_fan
+            data:
+              percentage: 42
+          - service: input_boolean.turn_off
+            data:
+              entity_id:
+                - "{{ trigger.to_state.entity_id }}"
+      - if:
+          - condition: trigger
+            id:
+              - Time30
+        then:
+          - service: fan.set_percentage
+            target:
+              entity_id: fan.wtw_rs485_wtw_fan
+            data:
+              percentage: 100
+          - delay:
+              hours: 0
+              minutes: 30
+              seconds: 0
+              milliseconds: 0
+            enabled: true
+          - service: fan.set_percentage
+            target:
+              entity_id:
+                - fan.wtw_rs485_wtw_fan
+              device_id: []
+              area_id: []
+            data:
+              percentage: 42
+          - service: input_boolean.turn_off
+            data:
+              entity_id:
+                - "{{ trigger.to_state.entity_id }}"
+mode: single
+
