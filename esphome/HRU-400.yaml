@@ -1,0 +1,64 @@
+# Place this file in ESPHOME
+
+substitutions:
+  name: HRU-400
+  skip_updates: 10
+
+esphome:
+  name: wtw-rs485
+  friendly_name: WTW-RS485
+  comment: "Itho Daalderop HRU 400 - Modbus Controller"
+
+packages:
+  remote_packages:
+    url: https://github.com/william-sy/Itho-daalderop-hru-400
+    ref: main
+    refresh: 0s
+    files: [
+      esphome/boards/m5stack-atom.yaml,
+      esphome/i18n/NL.YAML,
+      esphome/config/sensors.yaml,
+      esphome/config/numbers.yaml,
+      esphome/config/select.yaml,
+      esphome/config/fan.yaml
+    ]
+
+wifi:
+  ssid:         !secret lot_wifi_ssid
+  password:     !secret lot_wifi_password
+  fast_connect: on
+  use_address:  192.168.13.19
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid:     "HRU-RS485 Fallback Hotspot"
+    password: !secret wtw-fbw
+
+# Enable Home Assistant API
+api:
+  encryption:
+    key:        !secret wtw-api
+
+ota:
+  password:     !secret wtw-ota
+
+captive_portal:
+
+logger:
+
+##
+# Modbus settings:
+modbus:
+  id: modbus_hru
+  uart_id: uart_modbus_hru
+  #send_wait_time: 2000ms
+
+modbus_controller:
+  - id: hru
+    address:          0x48 # resolves to as per manual to 72
+    modbus_id:        modbus_hru
+    setup_priority:   -10
+    update_interval:  20s
+    command_throttle: 300ms
+
+
