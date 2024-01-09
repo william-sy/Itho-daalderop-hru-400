@@ -1,0 +1,8 @@
+substitutions: 
+  # fan.yaml
+  fan_name: "WTW - Venilator"
+  # select.yaml
+  select_FI_AM: "Flow inkomend - auto/handmatig"
+  select_FD_AM: "Flow vraag - auto/handmatig"
+  # numbers.yaml
+  # sensors.yaml

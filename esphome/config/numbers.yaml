@@ -1,3 +1,5 @@
+##
+# Replacing the filter should clear the error, but we want to overrride this if the filter is still fine.
 number:
   - platform: modbus_controller
     modbus_controller_id: hru
@@ -8,6 +10,8 @@ number:
     value_type: U_WORD
     skip_updates: 10
     use_write_multiple: true
+    entity_category: diagnostic
+    icon: mdi:air-filter
   - platform: modbus_controller
     modbus_controller_id: hru
     name: "Filter vuil - tijdmeting"
@@ -17,144 +21,8 @@ number:
     value_type: U_WORD
     skip_updates: 10
     use_write_multiple: true
-  - platform: modbus_controller
-    modbus_controller_id: hru
-    name: "Flow - afvoervolume"
-    id: HRU_errors3
-    register_type: holding
-    address: 202 # 0x000E
-    value_type: U_WORD
-    skip_updates: 10
-    use_write_multiple: true
-  - platform: modbus_controller
-    modbus_controller_id: hru
-    name: "Flow - toevoervolume"
-    id: HRU_errors4
-    register_type: holding
-    address: 203 # 0x000E
-    value_type: U_WORD
-    skip_updates: 10
-    use_write_multiple: true
-  - platform: modbus_controller
-    modbus_controller_id: hru
-    name: "Fout - Vochtsensor Intern"
-    id: HRU_errors11
-    register_type: holding
-    address: 210 # 0x000E
-    value_type: U_WORD
-    skip_updates: 10
-    use_write_multiple: true
-  - platform: modbus_controller
-    modbus_controller_id: hru
-    name: "Fout - Vochtsensor afvoer"
-    id: HRU_errors12
-    register_type: holding
-    address: 211 # 0x000E
-    value_type: U_WORD
-    skip_updates: 10
-    use_write_multiple: true
-  - platform: modbus_controller
-    modbus_controller_id: hru
-    name: "Fout - Vochtsensor toevoer"
-    id: HRU_errors13
-    register_type: holding
-    address: 212 # 0x000E
-    value_type: U_WORD
-    skip_updates: 10
-    use_write_multiple: true
-  - platform: modbus_controller
-    modbus_controller_id: hru
-    name: "Fout - Temperatuur sensor intern"
-    id: HRU_errors14
-    register_type: holding
-    address: 213 # 0x000E
-    value_type: U_WORD
-    skip_updates: 10
-    use_write_multiple: true
-  - platform: modbus_controller
-    modbus_controller_id: hru
-    name: "Fout - Temperatuur sensor toevoer"
-    id: HRU_errors15
-    register_type: holding
-    address: 214 # 0x000E
-    value_type: U_WORD
-    skip_updates: 10
-    use_write_multiple: true
-  - platform: modbus_controller
-    modbus_controller_id: hru
-    name: "Fout - Temperatuur sensor afvoer"
-    id: HRU_errors16
-    register_type: holding
-    address: 215 # 0x000E
-    value_type: U_WORD
-    skip_updates: 10
-    use_write_multiple: true
-  - platform: modbus_controller
-    modbus_controller_id: hru
-    name: "Fout - bypassklep 1"
-    id: HRU_errors21
-    register_type: holding
-    address: 220 # 0x000E
-    value_type: U_WORD
-    skip_updates: 10
-    use_write_multiple: true
-  - platform: modbus_controller
-    modbus_controller_id: hru
-    name: "Fout - bypassklep 2"
-    id: HRU_errors22
-    register_type: holding
-    address: 221 # 0x000E
-    value_type: U_WORD
-    skip_updates: 10
-    use_write_multiple: true
-  - platform: modbus_controller
-    modbus_controller_id: hru
-    name: "Fout - Electracompartiment"
-    id: HRU_errors23
-    register_type: holding
-    address: 222 # 0x000E
-    value_type: U_WORD
-    skip_updates: 10
-    use_write_multiple: true
-  - platform: modbus_controller
-    modbus_controller_id: hru
-    name: "Fout - volumesensor toevoer"
-    id: HRU_errors31
-    register_type: holding
-    address: 230 # 0x000E
-    value_type: U_WORD
-    skip_updates: 10
-    use_write_multiple: true
-  - platform: modbus_controller
-    modbus_controller_id: hru
-    name: "Fout - volumesensor afvoer"
-    id: HRU_errors32
-    register_type: holding
-    address: 231 # 0x000E
-    value_type: U_WORD
-    skip_updates: 10
-    use_write_multiple: true
-  - platform: modbus_controller
-    modbus_controller_id: hru
-    name: "Fout - ventilator module afvoer"
-    id: HRU_errors33
-    register_type: holding
-    address: 232 # 0x000E
-    value_type: U_WORD
-    skip_updates: 10
-    use_write_multiple: true
-  - platform: modbus_controller
-    modbus_controller_id: hru
-    name: "Fout - ventilator module toevoer"
-    id: HRU_errors34
-    register_type: holding
-    address: 233 # 0x000E
-    value_type: U_WORD
-    skip_updates: 10
-    use_write_multiple: True
-
-
-
+    entity_category: diagnostic
+    icon: mdi:air-filter
 ###
 ##
 # Controlling fan
@@ -163,6 +31,7 @@ number:
     modbus_controller_id: hru
     name: "Demand ventilation speed" # Sets actual fan speed
     id: HRU_fan_demand_value
+    icon: mdi:home-import-outline
     register_type: holding
     address: 2010
     min_value: 0
@@ -191,11 +60,13 @@ number:
     max_value: 1
     step: 1
     use_write_multiple: true
+    icon: mdi:toggle-switch-variant
 ## By Flow
   - platform: modbus_controller
     modbus_controller_id: hru
     name: "Flow ingress speed" # Sets actual fan speed
     id: HRU_fan_flow_ingress_value
+    icon: mdi:home-import-outline
     register_type: holding
     address: 2020
     min_value: 0
@@ -224,3 +95,4 @@ number:
     max_value: 1
     step: 1
     use_write_multiple: true
+    icon: mdi:toggle-switch-variant

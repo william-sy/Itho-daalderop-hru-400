@@ -12,3 +12,12 @@ For the automation to work you will need to create 2 helpers in home assistant:
 Icons: 
 - `mdi:fast-forward-30`
 - `mdi:fast-forward-60`
+
+
+## Secrets:
+you will need the following secrets, either create them in the `HRU-400.yaml` or place then in your secrets yaml:
+- !secret lot_wifi_ssid
+- !secret lot_wifi_password
+- !secret wtw-fbw
+- !secret wtw-api
+- !secret wtw-ota

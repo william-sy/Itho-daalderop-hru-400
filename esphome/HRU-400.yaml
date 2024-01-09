@@ -27,6 +27,7 @@ wifi:
   ssid:         !secret lot_wifi_ssid
   password:     !secret lot_wifi_password
   fast_connect: on
+  # if you gave your esp device a static IP
   use_address:  192.168.13.19
 
   # Enable fallback hotspot (captive portal) in case wifi connection fails

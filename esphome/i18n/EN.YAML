@@ -1,0 +1,8 @@
+substitutions:
+  # fan.yaml
+  fan_name: "WTW - Fan"
+  # select.yaml
+  select_FI_AM: "Flow ingress - auto/manual"
+  select_FD_AM: "Flow demand - auto/manual"
+  # numbers.yaml
+  # sensors.yaml
